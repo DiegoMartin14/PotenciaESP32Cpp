@@ -20,7 +20,7 @@ float rango = 0.11;
 float multiplicar = 0;
 int Set = 0;
 volatile int Contar = 0;
-const int TOP = 201;
+const int TOP = 255;
 short adc_valor;
 float divisor = 9.31;
 float temp;
@@ -41,7 +41,7 @@ void setup()
     analogSetAttenuation(ADC_11db); // Tensión de referencia de 3.3V
 
     // Configuración de la salida PWM
-    ledcSetup(PWM_CHANNEL, 9900, 8);            // Canal 0, frecuencia de 9900 Hz, resolución de 8 bits
+    ledcSetup(PWM_CHANNEL, 15000, 8);            // Canal 0, frecuencia de 9900 Hz, resolución de 8 bits
     ledcAttachPin(PWM_OUTPUT_PIN, PWM_CHANNEL); // Asigna el pin GPIO 2 al canal 0
 
     // Configuración de la interrupción externa
@@ -56,13 +56,12 @@ void loop()
     {                             // Verificar si hay datos disponibles para leer
         Caracter = Serial.read(); // Leer un caracter desde el monitor serie
     }
+
     if (Caracter == 't')
     {
         // Serial.write(12);
         Serial.print("Temperatura del sensor:");
         Serial.println(Actual);
-        Serial.println(bandaAlta);
-        Serial.println(bandaBaja);
         Caracter = 'f';
     }
 
